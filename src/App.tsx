@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { Suspense } from "react";
 
@@ -35,38 +35,36 @@ export default function App() {
       <ThemeProvider>
         <AuthProvider>
           <Suspense fallback={<Loader full />}>
-            <BrowserRouter>
-              <Routes>
-                <Route element={<Layout />}>
-                  <Route index element={<Home />} />
-                  <Route path="blog" element={<Blog />} />
-                  <Route path="blog/:slug" element={<BlogDetails />} />
-                  <Route path="categories" element={<Categories />} />
-                  <Route path="category/:slug" element={<Category />} />
-                  <Route path="search" element={<SearchPage />} />
-                  <Route path="about" element={<About />} />
-                  <Route path="contact" element={<Contact />} />
-                  <Route path="privacy" element={<Privacy />} />
-                  <Route path="terms" element={<Terms />} />
-                  <Route path="faq" element={<FAQ />} />
-                </Route>
+            <Routes>
+              <Route element={<Layout />}>
+                <Route index element={<Home />} />
+                <Route path="blog" element={<Blog />} />
+                <Route path="blog/:slug" element={<BlogDetails />} />
+                <Route path="categories" element={<Categories />} />
+                <Route path="category/:slug" element={<Category />} />
+                <Route path="search" element={<SearchPage />} />
+                <Route path="about" element={<About />} />
+                <Route path="contact" element={<Contact />} />
+                <Route path="privacy" element={<Privacy />} />
+                <Route path="terms" element={<Terms />} />
+                <Route path="faq" element={<FAQ />} />
+              </Route>
 
-                <Route path="admin/login" element={<Login />} />
-                <Route element={<ProtectedRoute />}>
-                  <Route path="admin" element={<AdminLayout />}>
-                    <Route path="dashboard" element={<Dashboard />} />
-                    <Route path="blogs" element={<AdminBlogs />} />
-                    <Route path="categories" element={<AdminCategories />} />
-                    <Route path="users" element={<AdminUsers />} />
-                    <Route path="settings" element={<AdminSettings />} />
-                  </Route>
+              <Route path="admin/login" element={<Login />} />
+              <Route element={<ProtectedRoute />}>
+                <Route path="admin" element={<AdminLayout />}>
+                  <Route path="dashboard" element={<Dashboard />} />
+                  <Route path="blogs" element={<AdminBlogs />} />
+                  <Route path="categories" element={<AdminCategories />} />
+                  <Route path="users" element={<AdminUsers />} />
+                  <Route path="settings" element={<AdminSettings />} />
                 </Route>
+              </Route>
 
-                <Route path="*" element={<Layout />}>
-                  <Route path="*" element={<NotFound />} />
-                </Route>
-              </Routes>
-            </BrowserRouter>
+              <Route path="*" element={<Layout />}>
+                <Route path="*" element={<NotFound />} />
+              </Route>
+            </Routes>
           </Suspense>
         </AuthProvider>
       </ThemeProvider>
