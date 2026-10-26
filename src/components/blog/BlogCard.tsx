@@ -6,11 +6,9 @@ import { calculateReadingTime } from "../../utils/readingTime";
 import { getCategoryLabel } from "../../services/categoryService";
 import { mockCategories } from "../../data/mockCategories";
 
-const API_ORIGIN =
-  (import.meta.env.VITE_API_URL || "http://localhost:5000/api/v1").replace(
-    /\/api\/v1\/?$/,
-    ""
-  );
+const API_ORIGIN = (
+  import.meta.env.VITE_API_URL || "https://api.eduepic.xyz/api/v1"
+).replace(/\/api\/v1\/?$/, "");
 
 const getImageUrl = (url?: string) => {
   if (!url) return "";

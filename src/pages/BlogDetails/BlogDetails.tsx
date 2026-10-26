@@ -14,11 +14,9 @@ import { articleSchema, breadcrumbSchema } from "../../utils/seoSchemas";
 import { SITE_CONFIG } from "../../constants/site";
 import type { SupportedLangCode, BlogPost, Category } from "../../types/blog";
 
-const API_ORIGIN =
-  (import.meta.env.VITE_API_URL || "http://localhost:5000/api/v1").replace(
-    /\/api\/v1\/?$/,
-    ""
-  );
+const API_ORIGIN = (
+  import.meta.env.VITE_API_URL || "https://api.eduepic.xyz/api/v1"
+).replace(/\/api\/v1\/?$/, "");
 
 /** Convert relative /uploads paths to absolute backend URL */
 const getMediaUrl = (url?: string | null): string => {
