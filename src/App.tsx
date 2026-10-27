@@ -1,11 +1,12 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 
 import { ThemeProvider } from "./context/ThemeContext";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Loader from "./components/common/Loader";
+import { trackPageView } from "./utils/analytics";
 
 import Layout from "./components/layout/Layout";
 import Home from "./pages/Home/Home";
@@ -30,6 +31,13 @@ import AdminUsers from "./pages/Admin/Users/Users";
 import AdminSettings from "./pages/Admin/Settings/Settings";
 
 export default function App() {
+  const location = useLocation();
+
+  // Track page views on every route change
+  useEffect(() => {
+    trackPageView(location.pathname + location.search);
+  }, [location]);
+
   return (
     <HelmetProvider>
       <ThemeProvider>
@@ -51,6 +59,7 @@ export default function App() {
               </Route>
 
               <Route path="admin/login" element={<Login />} />
+              
               <Route element={<ProtectedRoute />}>
                 <Route path="admin" element={<AdminLayout />}>
                   <Route path="dashboard" element={<Dashboard />} />
