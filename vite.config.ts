@@ -1,69 +1,32 @@
-// // import path from "path";
-// // import { fileURLToPath } from "url";
-// // import tailwindcss from "@tailwindcss/vite";
-// // import react from "@vitejs/plugin-react";
-// // import { defineConfig } from "vite";
-// // import { viteSingleFile } from "vite-plugin-singlefile";
-
-// // const __filename = fileURLToPath(import.meta.url);
-// // const __dirname = path.dirname(__filename);
-
-// // // https://vite.dev/config/
-// // export default defineConfig({
-// //   plugins: [react(), tailwindcss(), viteSingleFile()],
-// //   resolve: {
-// //     alias: {
-// //       "@": path.resolve(__dirname, "src"),
-// //     },
-// //   },
-// // });
-
-
-
-
-
-// import path from "path";
-// import { fileURLToPath } from "url";
-// import tailwindcss from "@tailwindcss/vite";
-// import react from "@vitejs/plugin-react";
-// import { defineConfig } from "vite";
-// import { viteSingleFile } from "vite-plugin-singlefile";
-
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
-
-// export default defineConfig({
-//   plugins: [react(), tailwindcss(), viteSingleFile()],
-//   resolve: {
-//     alias: {
-//       "@": path.resolve(__dirname, "src"),
-//     },
-//   },
-//   server: {
-//     proxy: {
-//       "/api": {
-//         target: "http://localhost:5000",
-//         changeOrigin: true,
-//         secure: false,
-//       },
-//       "/uploads": {
-//         target: "http://localhost:5000",
-//         changeOrigin: true,
-//         secure: false,
-//       },
-//     },
-//   },
-// });
-
-
-
 // frontend/vite.config.js
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
+import prerender from 'vite-plugin-prerender';
+import path from 'path';
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [
+    react(),
+    tailwindcss(),
+    prerender({
+      // Sirf important static pages pre-render hongi
+      routes: [
+        '/',
+        '/blog',
+        '/categories',
+        '/about',
+        '/contact',
+        '/faq',
+      ],
+      // Optional settings
+      renderer: '@prerenderer/renderer-puppeteer',
+      rendererOptions: {
+        headless: true,
+        renderAfterTime: 3000, // 3 seconds wait (content load hone ke liye)
+      },
+    }),
+  ],
   server: {
     port: 3000,
     proxy: {
