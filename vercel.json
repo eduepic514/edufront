@@ -1,14 +1,6 @@
 {
   "rewrites": [
     {
-      "source": "/sitemap.xml",
-      "destination": "https://fantastic-curiosity-production-2133.up.railway.app/sitemap.xml"
-    },
-    {
-      "source": "/robots.txt",
-      "destination": "https://fantastic-curiosity-production-2133.up.railway.app/robots.txt"
-    },
-    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
