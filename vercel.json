@@ -1,6 +1,18 @@
 {
   "rewrites": [
     {
+      "source": "/sitemap.xml",
+      "destination": "https://api.eduepic.xyz/sitemap.xml"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "https://api.eduepic.xyz/robots.txt"
+    },
+    {
+      "source": "/rss.xml",
+      "destination": "https://api.eduepic.xyz/rss.xml"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
